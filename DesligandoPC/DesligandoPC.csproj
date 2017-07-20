@@ -17,13 +17,14 @@
     <PublishUrl>C:\Users\Pichau\Desktop\Desligar\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateEnabled>true</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
+    <UpdateUrl>https://github.com/guimaraf/desligaPC/App/</UpdateUrl>
     <TargetCulture>pt-BR</TargetCulture>
     <ProductName>DesligandoPC</ProductName>
     <PublisherName>Chronos Games Studio</PublisherName>
