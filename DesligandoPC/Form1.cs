@@ -7,7 +7,7 @@ namespace DesligandoPC
     public partial class Form1 : Form
     {
         private int tempoCalcular = 0;
-        public string versao = "1.5", linguagem = "portugues";
+        public string versao = "1.6", linguagem = "portugues";
         private bool relogioFunciona = false, podeDesligar = false;
 
         public Form1()
@@ -245,13 +245,13 @@ namespace DesligandoPC
             RodarComando();
         }
        
-        private void traducaoApp(string lingua)
+        public void traducaoApp(string lingua)
         {
             if (lingua == "portugues")
             {
                 portugêsToolStripMenuItem.Checked = true;
                 inglêsToolStripMenuItem.Checked = false;
-                Form1.ActiveForm.Text = "Desligando PC";
+                ActiveForm.Text = "Desligando PC";
                 arquivoToolStripMenuItem.Text = "Arquivo";
                 sobreToolStripMenuItem.Text = "Sobre";
                 sairToolStripMenuItem.Text = "Sair";
@@ -299,7 +299,7 @@ namespace DesligandoPC
             {
                 portugêsToolStripMenuItem.Checked = false;
                 inglêsToolStripMenuItem.Checked = true;
-                Form1.ActiveForm.Text = "Turn off PC";
+                ActiveForm.Text = "Turn off PC";
                 arquivoToolStripMenuItem.Text = "File";
                 sobreToolStripMenuItem.Text = "About";
                 sairToolStripMenuItem.Text = "Exit";

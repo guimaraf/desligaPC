@@ -32,13 +32,14 @@
             this.lblContato = new System.Windows.Forms.Label();
             this.lblGithub = new System.Windows.Forms.Label();
             this.lblDownload = new System.Windows.Forms.Label();
+            this.lblVersao = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblNome
             // 
             this.lblNome.AutoSize = true;
             this.lblNome.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNome.Location = new System.Drawing.Point(93, 47);
+            this.lblNome.Location = new System.Drawing.Point(93, 52);
             this.lblNome.Name = "lblNome";
             this.lblNome.Size = new System.Drawing.Size(291, 20);
             this.lblNome.TabIndex = 0;
@@ -48,7 +49,7 @@
             // 
             this.lblContato.AutoSize = true;
             this.lblContato.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblContato.Location = new System.Drawing.Point(127, 87);
+            this.lblContato.Location = new System.Drawing.Point(128, 86);
             this.lblContato.Name = "lblContato";
             this.lblContato.Size = new System.Drawing.Size(223, 20);
             this.lblContato.TabIndex = 1;
@@ -74,11 +75,22 @@
             this.lblDownload.TabIndex = 4;
             this.lblDownload.Text = "Download do projeto em";
             // 
+            // lblVersao
+            // 
+            this.lblVersao.AutoSize = true;
+            this.lblVersao.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVersao.Location = new System.Drawing.Point(151, 22);
+            this.lblVersao.Name = "lblVersao";
+            this.lblVersao.Size = new System.Drawing.Size(180, 20);
+            this.lblVersao.TabIndex = 5;
+            this.lblVersao.Text = "DesligaPC versão 1.6";
+            // 
             // FormSobre
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 265);
+            this.Controls.Add(this.lblVersao);
             this.Controls.Add(this.lblDownload);
             this.Controls.Add(this.lblGithub);
             this.Controls.Add(this.lblContato);
@@ -105,5 +117,6 @@
         private System.Windows.Forms.Label lblContato;
         private System.Windows.Forms.Label lblGithub;
         private System.Windows.Forms.Label lblDownload;
+        private System.Windows.Forms.Label lblVersao;
     }
 }
