@@ -81,9 +81,9 @@
             this.lblVersao.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblVersao.Location = new System.Drawing.Point(151, 22);
             this.lblVersao.Name = "lblVersao";
-            this.lblVersao.Size = new System.Drawing.Size(180, 20);
+            this.lblVersao.Size = new System.Drawing.Size(150, 20);
             this.lblVersao.TabIndex = 5;
-            this.lblVersao.Text = "DesligaPC versão 1.6";
+            this.lblVersao.Text = "DesligaPC versão";
             // 
             // FormSobre
             // 

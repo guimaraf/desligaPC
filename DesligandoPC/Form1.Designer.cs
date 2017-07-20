@@ -48,6 +48,7 @@
             this.inglêsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.cBoxHibernar = new System.Windows.Forms.CheckBox();
+            this.desligarAgoraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -156,14 +157,14 @@
             // sobreToolStripMenuItem
             // 
             this.sobreToolStripMenuItem.Name = "sobreToolStripMenuItem";
-            this.sobreToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
+            this.sobreToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.sobreToolStripMenuItem.Text = "Sobre";
             this.sobreToolStripMenuItem.Click += new System.EventHandler(this.sobreToolStripMenuItem_Click);
             // 
             // sairToolStripMenuItem
             // 
             this.sairToolStripMenuItem.Name = "sairToolStripMenuItem";
-            this.sairToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
+            this.sairToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.sairToolStripMenuItem.Text = "Sair";
             this.sairToolStripMenuItem.Click += new System.EventHandler(this.sairToolStripMenuItem_Click);
             // 
@@ -171,7 +172,8 @@
             // 
             this.açãoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.reiniciarToolStripMenuItem,
-            this.hibernarToolStripMenuItem});
+            this.hibernarToolStripMenuItem,
+            this.desligarAgoraToolStripMenuItem});
             this.açãoToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.açãoToolStripMenuItem.Name = "açãoToolStripMenuItem";
             this.açãoToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
@@ -206,14 +208,14 @@
             this.portugêsToolStripMenuItem.Checked = true;
             this.portugêsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.portugêsToolStripMenuItem.Name = "portugêsToolStripMenuItem";
-            this.portugêsToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.portugêsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.portugêsToolStripMenuItem.Text = "Português";
             this.portugêsToolStripMenuItem.Click += new System.EventHandler(this.portugêsToolStripMenuItem_Click);
             // 
             // inglêsToolStripMenuItem
             // 
             this.inglêsToolStripMenuItem.Name = "inglêsToolStripMenuItem";
-            this.inglêsToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.inglêsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.inglêsToolStripMenuItem.Text = "Inglês";
             this.inglêsToolStripMenuItem.Click += new System.EventHandler(this.inglêsToolStripMenuItem_Click);
             // 
@@ -233,6 +235,13 @@
             this.cBoxHibernar.Text = "Hibernar";
             this.cBoxHibernar.UseVisualStyleBackColor = true;
             this.cBoxHibernar.CheckedChanged += new System.EventHandler(this.cBoxHibernar_CheckedChanged);
+            // 
+            // desligarAgoraToolStripMenuItem
+            // 
+            this.desligarAgoraToolStripMenuItem.Name = "desligarAgoraToolStripMenuItem";
+            this.desligarAgoraToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.desligarAgoraToolStripMenuItem.Text = "Desligar Agora";
+            this.desligarAgoraToolStripMenuItem.Click += new System.EventHandler(this.desligarAgoraToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -284,6 +293,7 @@
         private System.Windows.Forms.ToolStripMenuItem hibernarToolStripMenuItem;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.CheckBox cBoxHibernar;
+        private System.Windows.Forms.ToolStripMenuItem desligarAgoraToolStripMenuItem;
     }
 }
 

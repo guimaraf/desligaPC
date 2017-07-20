@@ -93,12 +93,12 @@ namespace DesligandoPC
 
         private void reiniciarToolStripMenuItem_Click(object sender, EventArgs e)//Reiniciar direto
         {
-            System.Diagnostics.Process.Start("shutdown", "-r -t 10");
+            WinPower.Execute(WinPower.PowerOption.Reboot);
         }
 
         private void hibernarToolStripMenuItem_Click(object sender, EventArgs e)//Hibernar direto
         {
-            System.Diagnostics.Process.Start("shutdown", "-h");
+            hibernar();
         }
 
         private void portugêsToolStripMenuItem_Click(object sender, EventArgs e)//Tradução português
@@ -191,13 +191,13 @@ namespace DesligandoPC
 
         private void hibernar()
         {
-            //System.Diagnostics.Process.Start("shutdown", "-h");
-            Application.SetSuspendState(PowerState.Hibernate, false, false);
+            WinPower.Execute(WinPower.PowerOption.Hibernate);
+            //Application.SetSuspendState(PowerState.Hibernate, false, false);
         }
 
         private void desligar()
         {
-            System.Diagnostics.Process.Start("shutdown", "-s -t " + 0);
+            WinPower.Execute(WinPower.PowerOption.PowerOff);
         }
         
         private void Cancelar()//Cancelar tempo de desligamento
@@ -212,6 +212,11 @@ namespace DesligandoPC
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void desligarAgoraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            desligar();
         }
 
         private void calcularTempo()
