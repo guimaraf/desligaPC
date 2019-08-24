@@ -24,13 +24,13 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <UpdateUrl>https://github.com/guimaraf/desligaPC/App/</UpdateUrl>
+    <UpdateUrl>https://github.com/guimaraf/desligaPC/releases/</UpdateUrl>
     <TargetCulture>pt-BR</TargetCulture>
     <ProductName>DesligandoPC</ProductName>
     <PublisherName>Chronos Games Studio</PublisherName>
     <SuiteName>DesligandoPC</SuiteName>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>17</ApplicationRevision>
+    <ApplicationRevision>27</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -59,10 +59,10 @@
     <ApplicationIcon>shutdown.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>7345B7A1E71AFC58964955AF6B0E4A214BBA9EC5</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>11C07F37F6CB1830963545A58B2C209C8448A053</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>DesligandoPC_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>DesligandoPC_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -85,7 +85,6 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -121,6 +120,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="DesligandoPC_1_TemporaryKey.pfx" />
     <None Include="DesligandoPC_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

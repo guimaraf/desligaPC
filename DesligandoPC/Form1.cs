@@ -6,26 +6,65 @@ namespace DesligandoPC
     [Serializable]
     public partial class Form1 : Form
     {
-        private int tempoCalcular = 0;
-        public string versao = "1.6", linguagem = "portugues";
-        private bool relogioFunciona = false, podeDesligar = false;
+        private int timeCalculate = 0;
+        private int translateId = 0;
+        public string version = "1.8";
+        private bool clockActive = false, shutdownEnable = false;
 
         public Form1()
         {
             InitializeComponent();
-            
         }
 
-        //Botões//
+        #region Menu events
+        private void AboutMenuItem_Click(object sender, EventArgs e)
+        {
+            FormSobre newForm = new FormSobre();
+            newForm.Show();
+            newForm.TranslateApp(translateId);
+            this.Hide();
+        }
+        private void ExitMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+        private void RebootMenuItem_Click(object sender, EventArgs e)
+        {
+            WinPower.Execute(WinPower.PowerOption.Reboot);
+        }
+        private void HibernateMenuItem_Click(object sender, EventArgs e)//Hibernar direto
+        {
+            Hibernar();
+        }
+        private void ShutdownMenuItem_Click(object sender, EventArgs e)
+        {
+            Shutdown();
+        }
+        private void PortugueseMenuItem_Click(object sender, EventArgs e)//Tradução português
+        {
+            translateId = 0;
+            TranslateApp();
+        }
+        private void EnglishMenuItem_Click(object sender, EventArgs e)//Tradução Inglês
+        {
+            translateId = 1;
+            TranslateApp();
+        }
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
+        #endregion
+
         private void button1_Click(object sender, EventArgs e)
         {
-            if (!podeDesligar)
+            if (!shutdownEnable)
             {
                 if (textBox1.TextLength > 0)
                 {
-                    podeDesligar = true;
-                    calcularTempo();
-                    traducaoApp(linguagem);
+                    shutdownEnable = true;
+                    CalculeTime();
+                    TranslateApp();
                     cBoxHibernar.Enabled = false;
                     cBoxHours.Enabled = false;
                     cBoxMinuts.Enabled = false;
@@ -33,21 +72,15 @@ namespace DesligandoPC
                 }
                 else
                 {
-                    if (linguagem == "portugues")
-                    {
-                        MessageBox.Show("Digite o tempo que deseja desligar o PC", "Desligar o PC", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Enter the time you want to turn off the PC", "Turn off the PC", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    }
+                    MessageBox.Show(translateId == 0 ? "Digite o tempo que deseja desligar o PC" : "Enter the time you want to turn off the PC",
+                        translateId == 0 ? "Desligar o PC" : "Turn off the PC", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 }
             }
             else
             {
-                podeDesligar = false;
-                Cancelar();
-                traducaoApp(linguagem);
+                shutdownEnable = false;
+                Cancel();
+                TranslateApp();
                 cBoxHibernar.Enabled = true;
                 cBoxHours.Enabled = true;
                 cBoxMinuts.Enabled = true;
@@ -55,6 +88,7 @@ namespace DesligandoPC
             }
         }
 
+        #region All Check Box
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != 08)//Se a tecla digitada não for número
@@ -62,100 +96,35 @@ namespace DesligandoPC
                 e.Handled = true;
             }
         }
-        
+
         private void cBoxHours_Click(object sender, EventArgs e)//Ativando cada um dos checkbox e desativando os demais
         {
-            trocarCkeckBox(0);
+            CkeckBoxChange(0);
         }
 
         private void cBoxMinuts_Click(object sender, EventArgs e)
         {
-            trocarCkeckBox(1);
+            CkeckBoxChange(1);
         }
 
         private void cBoxSeconds_Click(object sender, EventArgs e)
         {
-            trocarCkeckBox(2);
+            CkeckBoxChange(2);
         }
 
-        private void sobreToolStripMenuItem_Click(object sender, EventArgs e)//Trocar idioma
-        {
-            FormSobre novoFormulario = new FormSobre();
-            novoFormulario.Show();
-            novoFormulario.TraduzirApp(linguagem);
-            this.Hide();
-        }
-
-        private void sairToolStripMenuItem_Click(object sender, EventArgs e)//Fechar o programa
-        {
-            Application.Exit();
-        }
-
-        private void reiniciarToolStripMenuItem_Click(object sender, EventArgs e)//Reiniciar direto
-        {
-            WinPower.Execute(WinPower.PowerOption.Reboot);
-        }
-
-        private void hibernarToolStripMenuItem_Click(object sender, EventArgs e)//Hibernar direto
-        {
-            hibernar();
-        }
-
-        private void portugêsToolStripMenuItem_Click(object sender, EventArgs e)//Tradução português
-        {
-            linguagem = "portugues";
-            traducaoApp(linguagem);
-        }
-
-        private void inglêsToolStripMenuItem_Click(object sender, EventArgs e)//Tradução Inglês
-        {
-            linguagem = "ingles";
-            traducaoApp(linguagem);
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            if (relogioFunciona)
-            {
-                tempoCalcular -= 1;
-                //textBox1.Text = Convert.ToString(tempoCalcular);
-
-                textBox1.Text = String.Format("{0:#,0#}:{1:#,0#}:{2:#,0#}", (tempoCalcular / 3600), ((tempoCalcular % 3600) / 60), ((tempoCalcular % 3600) % 60));
-            }
-            
-            if(tempoCalcular == 0)//Finalizando o contador
-            {
-                timer1.Stop();
-                //relogioFunciona = false;
-
-                if (cBoxHibernar.Checked == true)
-                {
-                    hibernar();
-                    relogioFunciona = false;
-                }
-                else
-                {
-                    desligar();
-                    relogioFunciona = false;
-                }
-            }
-        }
-
-        private void cBoxHibernar_CheckedChanged(object sender, EventArgs e)//Ao clicar no hibertar, vai também mudar os textos
+        private void cBoxHibernar_CheckedChanged(object sender, EventArgs e)
         {
             if (cBoxHibernar.Checked == true)
             {
-                traducaoApp(linguagem);
+                TranslateApp();
             }
             else
             {
-                traducaoApp(linguagem);
+                TranslateApp();
             }
         }
 
-        //Funções//
-
-        private void trocarCkeckBox(int testeCheck)//Joguei dentro de uma função para poder reaproveitar o código
+        private void CkeckBoxChange(int testeCheck)
         {
             if (testeCheck == 0)
             {
@@ -181,7 +150,33 @@ namespace DesligandoPC
             textBox1.Text = "1";
         }
 
-        private void RodarComando()//Ativa o relógio
+        #endregion
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            if (clockActive)
+            {
+                timeCalculate -= 1;
+                textBox1.Text = String.Format("{0:#,0#}:{1:#,0#}:{2:#,0#}", (timeCalculate / 3600), ((timeCalculate % 3600) / 60), ((timeCalculate % 3600) % 60));
+            }
+
+            if (timeCalculate == 0)
+            {
+                timer1.Stop();
+                if (cBoxHibernar.Checked == true)
+                {
+                    Hibernar();
+                    clockActive = false;
+                }
+                else
+                {
+                    Shutdown();
+                    clockActive = false;
+                }
+            }
+        }
+
+        private void ClockStart()
         {
             timer1.Interval = 1000;
             textBox1.Enabled = false;
@@ -189,162 +184,95 @@ namespace DesligandoPC
         }
 
 
-        private void hibernar()
+        private void Hibernar()
         {
             WinPower.Execute(WinPower.PowerOption.Hibernate);
-            //Application.SetSuspendState(PowerState.Hibernate, false, false);
         }
 
-        private void desligar()
+        private void Shutdown()
         {
             WinPower.Execute(WinPower.PowerOption.PowerOff);
         }
         
-        private void Cancelar()//Cancelar tempo de desligamento
+        private void Cancel()
         {
             textBox1.Enabled = true;
-            relogioFunciona = false;
+            clockActive = false;
             timer1.Stop();
-            trocarCkeckBox(0);
+            CkeckBoxChange(0);
             textBox1.Text = "1";
         }
 
-        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        private void CalculeTime()
         {
-            Application.Exit();
-        }
-
-        private void desligarAgoraToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            desligar();
-        }
-
-        private void calcularTempo()
-        {
-            if (cBoxHours.Checked) //Horas
+            if (cBoxHours.Checked)
             {
-                tempoCalcular = Convert.ToInt32(textBox1.Text) * 3600;
+                timeCalculate = Convert.ToInt32(textBox1.Text) * 3600;
             }
 
-            else if (cBoxMinuts.Checked) //Minutos
+            else if (cBoxMinuts.Checked)
             {
-                tempoCalcular = Convert.ToInt32(textBox1.Text) * 60;
+                timeCalculate = Convert.ToInt32(textBox1.Text) * 60;
             }
 
-            else if (cBoxSeconds.Checked) //Segundos
+            else if (cBoxSeconds.Checked)
             {
-                tempoCalcular = Convert.ToInt32(textBox1.Text);
-                if (tempoCalcular < 50)
+                timeCalculate = Convert.ToInt32(textBox1.Text);
+                if (timeCalculate < 50)
                 {
-                    if (portugêsToolStripMenuItem.Checked == true)
-                    {
-                        MessageBox.Show("O computador será desligado em " + tempoCalcular + " segundos", "Desligar o PC", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    }
-                    else
-                    {
-                        MessageBox.Show("The computer will shut down in " + tempoCalcular + " seconds", "Shut down the PC", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    }
+                    MessageBox.Show((translateId == 0 ? "O computador será desligado em " : "The computer will shut down in ")
+                        + timeCalculate + (translateId == 0 ? " segundos" : " seconds"), 
+                        (translateId == 0 ? "Desligar o PC" : "Shut down the PC") , MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 }
             }
-            relogioFunciona = true;
-            RodarComando();
+            clockActive = true;
+            ClockStart();
         }
-       
-        public void traducaoApp(string lingua)
-        {
-            if (lingua == "portugues")
-            {
-                portugêsToolStripMenuItem.Checked = true;
-                inglêsToolStripMenuItem.Checked = false;
-                ActiveForm.Text = "Desligando PC";
-                arquivoToolStripMenuItem.Text = "Arquivo";
-                sobreToolStripMenuItem.Text = "Sobre";
-                sairToolStripMenuItem.Text = "Sair";
-                açãoToolStripMenuItem.Text = "Ação";
-                reiniciarToolStripMenuItem.Text = "Reiniciar Agora";
-                hibernarToolStripMenuItem.Text = "Hibernar Agora";
-                idiomaToolStripMenuItem.Text = "Linguagem";
-                portugêsToolStripMenuItem.Text = "Português";
-                inglêsToolStripMenuItem.Text = "Inglês";
-                cBoxHours.Text = "Horas";
-                cBoxMinuts.Text = "Minutos";
-                cBoxSeconds.Text = "Segundos";
-                label1.Location = new System.Drawing.Point(161, 175);
-                cBoxHibernar.Text = "Hibernar";
 
-                if (!podeDesligar)
+        public void TranslateApp()
+        {
+            portugueseMenuItem.Checked = translateId == 0 ? true : false;
+            englishMenuItem.Checked = translateId == 0 ? false : true;
+            ActiveForm.Text = translateId == 0 ? "Desligando PC" : "Turn off PC";
+            fileMenuItem.Text = translateId == 0 ? "Arquivo" : "File";
+            aboultMenuItem.Text = translateId == 0 ? "Sobre" : "About";
+            exitMenuItem.Text = translateId == 0 ? "Sair" : "Exit";
+            actionMenuItem.Text = translateId == 0 ? "Ação" : "Action";
+            rebootMenuItem.Text = translateId == 0 ? "Reiniciar Agora" : "Reboot Now";
+            hibernateMenuItem.Text = translateId == 0 ? "Hibernar Agora" : "Hibernate Now";
+            languageMenuItem.Text = translateId == 0 ? "Idioma" : "Language";
+            portugueseMenuItem.Text = translateId == 0 ? "Português" : "Portuguese";
+            englishMenuItem.Text = translateId == 0 ? "Inglês" : "English";
+            cBoxHours.Text = translateId == 0 ? "Horas" : "Hours";
+            cBoxMinuts.Text = translateId == 0 ? "Minutos" : "Minutes";
+            cBoxSeconds.Text = translateId == 0 ? "Segundos": "Seconds";
+            label1.Location = new System.Drawing.Point(translateId == 0 ? 161 : 135, 175);
+            cBoxHibernar.Text = translateId == 0 ? "Hibernar" : "Hibernate";
+
+            if (!shutdownEnable)
+            {
+                if (cBoxHibernar.Checked == true)
                 {
-                    if (cBoxHibernar.Checked == true)
-                    {
-                        label1.Text = "Tempo para hibernar";
-                        button1.Text = "Hibernar PC";
-                    }
-                    else
-                    {
-                        button1.Text = "Desligar PC";
-                        label1.Text = "Tempo para desligar";
-                    }
+                    label1.Text = translateId == 0 ? "Tempo para hibernar" : "Time to hibernate equipment";
+                    button1.Text = translateId == 0 ? "Hibernar PC" : "Hibernate PC";
                 }
                 else
                 {
-                    if (cBoxHibernar.Checked == true)
-                    {
-                        button1.Text = "Cancelar";
-                        label1.Text = "Tempo para hibernar";
-                    }
-                    else
-                    {
-                        button1.Text = "Cancelar";
-                        label1.Text = "Tempo para desligar";
-                    }
-                    
+                    label1.Text = translateId == 0 ? "Tempo para desligar" : "Time to turn off equipment";
+                    button1.Text = translateId == 0 ? "Desligar PC" : "Turn off PC";
                 }
             }
             else
             {
-                portugêsToolStripMenuItem.Checked = false;
-                inglêsToolStripMenuItem.Checked = true;
-                ActiveForm.Text = "Turn off PC";
-                arquivoToolStripMenuItem.Text = "File";
-                sobreToolStripMenuItem.Text = "About";
-                sairToolStripMenuItem.Text = "Exit";
-                açãoToolStripMenuItem.Text = "Action";
-                reiniciarToolStripMenuItem.Text = "Reboot Now";
-                hibernarToolStripMenuItem.Text = "Hibernate Now";
-                idiomaToolStripMenuItem.Text = "Language";
-                portugêsToolStripMenuItem.Text = "Portuguese";
-                inglêsToolStripMenuItem.Text = "English";
-                cBoxHours.Text = "Hours";
-                cBoxMinuts.Text = "Minutes";
-                cBoxSeconds.Text = "Seconds";
-                label1.Location = new System.Drawing.Point(135, 175);
-                cBoxHibernar.Text = "Hibernate";
-
-                if (!podeDesligar)
+                if (cBoxHibernar.Checked == true)
                 {
-                    if (cBoxHibernar.Checked == true)
-                    {
-                        button1.Text = "Hibernate PC";
-                        label1.Text = "Time to hibernate equipment";
-                    }
-                    else
-                    {
-                        button1.Text = "Turn off PC";
-                        label1.Text = "Time to turn off equipment";
-                    }
+                    label1.Text = translateId == 0 ? "Tempo para hibernar" : "Time to hibernate equipment";
+                    button1.Text = translateId == 0 ? "Cancelar" : "Cancel";
                 }
                 else
                 {
-                    if (cBoxHibernar.Checked == true)
-                    {
-                        button1.Text = "Cancel";
-                        label1.Text = "Time to hibernate equipment";
-                    }
-                    else
-                    {
-                        button1.Text = "Cancel";
-                        label1.Text = "Time to turn off equipment";
-                    }
+                    label1.Text = translateId == 0 ? "Tempo para desligar" : "Time to turn off equipment";
+                    button1.Text = translateId == 0 ? "Cancelar" : "Cancel";
                 }
             }
         }

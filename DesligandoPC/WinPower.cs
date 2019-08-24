@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
 
 namespace DesligandoPC
 {
@@ -12,7 +9,7 @@ namespace DesligandoPC
         internal struct TokPriv1Luid
         {
             public int Count;
-            public long Luid;
+            public long valueNumber;
             public int Attr;
         }
 
@@ -76,17 +73,17 @@ namespace DesligandoPC
             }
             else
             {
-                bool ok;
-                TokPriv1Luid tp;
+                bool confirm;
+                TokPriv1Luid tokPrivilege;
                 IntPtr hproc = GetCurrentProcess();
                 IntPtr htok = IntPtr.Zero;
-                ok = OpenProcessToken(hproc, TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, ref htok);
-                tp.Count = 1;
-                tp.Luid = 0;
-                tp.Attr = SE_PRIVILEGE_ENABLED;
-                ok = LookupPrivilegeValue(null, SE_SHUTDOWN_NAME, ref tp.Luid);
-                ok = AdjustTokenPrivileges(htok, false, ref tp, 0, IntPtr.Zero, IntPtr.Zero);
-                ok = ExitWindowsEx((int)option, 0);
+                confirm = OpenProcessToken(hproc, TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, ref htok);
+                tokPrivilege.Count = 1;
+                tokPrivilege.valueNumber = 0;
+                tokPrivilege.Attr = SE_PRIVILEGE_ENABLED;
+                confirm = LookupPrivilegeValue(null, SE_SHUTDOWN_NAME, ref tokPrivilege.valueNumber);
+                confirm = AdjustTokenPrivileges(htok, false, ref tokPrivilege, 0, IntPtr.Zero, IntPtr.Zero);
+                confirm = ExitWindowsEx((int)option, 0);
             }
         }
     }

@@ -1,4 +1,8 @@
-﻿namespace DesligandoPC
+﻿using System;
+using System.Runtime.Serialization;
+using System.Windows.Forms;
+
+namespace DesligandoPC
 {
     partial class Form1
     {
@@ -33,22 +37,22 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.cBoxSeconds = new System.Windows.Forms.CheckBox();
             this.cBoxMinuts = new System.Windows.Forms.CheckBox();
             this.cBoxHours = new System.Windows.Forms.CheckBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.arquivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sobreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.açãoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.reiniciarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.hibernarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.idiomaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.portugêsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.inglêsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboultMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.actionMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rebootMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hibernateMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.shutdownMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.languageMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.portugueseMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.englishMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.cBoxHibernar = new System.Windows.Forms.CheckBox();
-            this.desligarAgoraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cBoxSeconds = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -90,19 +94,6 @@
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
-            // cBoxSeconds
-            // 
-            this.cBoxSeconds.AutoSize = true;
-            this.cBoxSeconds.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cBoxSeconds.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.cBoxSeconds.Location = new System.Drawing.Point(329, 122);
-            this.cBoxSeconds.Name = "cBoxSeconds";
-            this.cBoxSeconds.Size = new System.Drawing.Size(109, 24);
-            this.cBoxSeconds.TabIndex = 4;
-            this.cBoxSeconds.Text = "Segundos";
-            this.cBoxSeconds.UseVisualStyleBackColor = true;
-            this.cBoxSeconds.Click += new System.EventHandler(this.cBoxSeconds_Click);
-            // 
             // cBoxMinuts
             // 
             this.cBoxMinuts.AutoSize = true;
@@ -135,93 +126,100 @@
             // 
             this.menuStrip1.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.arquivoToolStripMenuItem,
-            this.açãoToolStripMenuItem,
-            this.idiomaToolStripMenuItem});
+            this.fileMenuItem,
+            this.actionMenuItem,
+            this.languageMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(496, 24);
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // arquivoToolStripMenuItem
+            // fileMenuItem
             // 
-            this.arquivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.sobreToolStripMenuItem,
-            this.sairToolStripMenuItem});
-            this.arquivoToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.arquivoToolStripMenuItem.Name = "arquivoToolStripMenuItem";
-            this.arquivoToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
-            this.arquivoToolStripMenuItem.Text = "Arquivo";
+            this.fileMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboultMenuItem,
+            this.exitMenuItem});
+            this.fileMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fileMenuItem.Name = "fileMenuItem";
+            this.fileMenuItem.Size = new System.Drawing.Size(66, 20);
+            this.fileMenuItem.Text = "Arquivo";
             // 
-            // sobreToolStripMenuItem
+            // aboultMenuItem
             // 
-            this.sobreToolStripMenuItem.Name = "sobreToolStripMenuItem";
-            this.sobreToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.sobreToolStripMenuItem.Text = "Sobre";
-            this.sobreToolStripMenuItem.Click += new System.EventHandler(this.sobreToolStripMenuItem_Click);
+            this.aboultMenuItem.Name = "aboultMenuItem";
+            this.aboultMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboultMenuItem.Text = "Sobre";
+            this.aboultMenuItem.Click += new System.EventHandler(this.AboutMenuItem_Click);
             // 
-            // sairToolStripMenuItem
+            // exitMenuItem
             // 
-            this.sairToolStripMenuItem.Name = "sairToolStripMenuItem";
-            this.sairToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.sairToolStripMenuItem.Text = "Sair";
-            this.sairToolStripMenuItem.Click += new System.EventHandler(this.sairToolStripMenuItem_Click);
+            this.exitMenuItem.Name = "exitMenuItem";
+            this.exitMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitMenuItem.Text = "Sair";
+            this.exitMenuItem.Click += new System.EventHandler(this.ExitMenuItem_Click);
             // 
-            // açãoToolStripMenuItem
+            // actionMenuItem
             // 
-            this.açãoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.reiniciarToolStripMenuItem,
-            this.hibernarToolStripMenuItem,
-            this.desligarAgoraToolStripMenuItem});
-            this.açãoToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.açãoToolStripMenuItem.Name = "açãoToolStripMenuItem";
-            this.açãoToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
-            this.açãoToolStripMenuItem.Text = "Ação";
+            this.actionMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.rebootMenuItem,
+            this.hibernateMenuItem,
+            this.shutdownMenuItem});
+            this.actionMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.actionMenuItem.Name = "actionMenuItem";
+            this.actionMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.actionMenuItem.Text = "Ação";
             // 
-            // reiniciarToolStripMenuItem
+            // rebootMenuItem
             // 
-            this.reiniciarToolStripMenuItem.Name = "reiniciarToolStripMenuItem";
-            this.reiniciarToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
-            this.reiniciarToolStripMenuItem.Text = "Reiniciar Agora";
-            this.reiniciarToolStripMenuItem.Click += new System.EventHandler(this.reiniciarToolStripMenuItem_Click);
+            this.rebootMenuItem.Name = "rebootMenuItem";
+            this.rebootMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.rebootMenuItem.Text = "Reiniciar Agora";
+            this.rebootMenuItem.Click += new System.EventHandler(this.RebootMenuItem_Click);
             // 
-            // hibernarToolStripMenuItem
+            // hibernateMenuItem
             // 
-            this.hibernarToolStripMenuItem.Name = "hibernarToolStripMenuItem";
-            this.hibernarToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
-            this.hibernarToolStripMenuItem.Text = "Hibernar Agora";
-            this.hibernarToolStripMenuItem.Click += new System.EventHandler(this.hibernarToolStripMenuItem_Click);
+            this.hibernateMenuItem.Name = "hibernateMenuItem";
+            this.hibernateMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.hibernateMenuItem.Text = "Hibernar Agora";
+            this.hibernateMenuItem.Click += new System.EventHandler(this.HibernateMenuItem_Click);
             // 
-            // idiomaToolStripMenuItem
+            // shutdownMenuItem
             // 
-            this.idiomaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.portugêsToolStripMenuItem,
-            this.inglêsToolStripMenuItem});
-            this.idiomaToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.idiomaToolStripMenuItem.Name = "idiomaToolStripMenuItem";
-            this.idiomaToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
-            this.idiomaToolStripMenuItem.Text = "Idioma";
+            this.shutdownMenuItem.Name = "shutdownMenuItem";
+            this.shutdownMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.shutdownMenuItem.Text = "Desligar Agora";
+            this.shutdownMenuItem.Click += new System.EventHandler(this.ShutdownMenuItem_Click);
             // 
-            // portugêsToolStripMenuItem
+            // languageMenuItem
             // 
-            this.portugêsToolStripMenuItem.Checked = true;
-            this.portugêsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.portugêsToolStripMenuItem.Name = "portugêsToolStripMenuItem";
-            this.portugêsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.portugêsToolStripMenuItem.Text = "Português";
-            this.portugêsToolStripMenuItem.Click += new System.EventHandler(this.portugêsToolStripMenuItem_Click);
+            this.languageMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.portugueseMenuItem,
+            this.englishMenuItem});
+            this.languageMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.languageMenuItem.Name = "languageMenuItem";
+            this.languageMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.languageMenuItem.Text = "Idioma";
             // 
-            // inglêsToolStripMenuItem
+            // portugueseMenuItem
             // 
-            this.inglêsToolStripMenuItem.Name = "inglêsToolStripMenuItem";
-            this.inglêsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.inglêsToolStripMenuItem.Text = "Inglês";
-            this.inglêsToolStripMenuItem.Click += new System.EventHandler(this.inglêsToolStripMenuItem_Click);
+            this.portugueseMenuItem.Checked = true;
+            this.portugueseMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.portugueseMenuItem.Name = "portugueseMenuItem";
+            this.portugueseMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.portugueseMenuItem.Text = "Português";
+            this.portugueseMenuItem.Click += new System.EventHandler(this.PortugueseMenuItem_Click);
+            // 
+            // englishMenuItem
+            // 
+            this.englishMenuItem.Name = "englishMenuItem";
+            this.englishMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.englishMenuItem.Text = "Inglês";
+            this.englishMenuItem.Click += new System.EventHandler(this.EnglishMenuItem_Click);
             // 
             // timer1
             // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.timer1.Tick += new System.EventHandler(this.Timer_Tick);
             // 
             // cBoxHibernar
             // 
@@ -236,12 +234,18 @@
             this.cBoxHibernar.UseVisualStyleBackColor = true;
             this.cBoxHibernar.CheckedChanged += new System.EventHandler(this.cBoxHibernar_CheckedChanged);
             // 
-            // desligarAgoraToolStripMenuItem
+            // cBoxSeconds
             // 
-            this.desligarAgoraToolStripMenuItem.Name = "desligarAgoraToolStripMenuItem";
-            this.desligarAgoraToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
-            this.desligarAgoraToolStripMenuItem.Text = "Desligar Agora";
-            this.desligarAgoraToolStripMenuItem.Click += new System.EventHandler(this.desligarAgoraToolStripMenuItem_Click);
+            this.cBoxSeconds.AutoSize = true;
+            this.cBoxSeconds.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cBoxSeconds.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.cBoxSeconds.Location = new System.Drawing.Point(329, 122);
+            this.cBoxSeconds.Name = "cBoxSeconds";
+            this.cBoxSeconds.Size = new System.Drawing.Size(109, 24);
+            this.cBoxSeconds.TabIndex = 4;
+            this.cBoxSeconds.Text = "Segundos";
+            this.cBoxSeconds.UseVisualStyleBackColor = true;
+            this.cBoxSeconds.Click += new System.EventHandler(this.cBoxSeconds_Click);
             // 
             // Form1
             // 
@@ -278,22 +282,24 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.CheckBox cBoxSeconds;
         private System.Windows.Forms.CheckBox cBoxMinuts;
         private System.Windows.Forms.CheckBox cBoxHours;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem arquivoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem sobreToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem sairToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem açãoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem reiniciarToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem idiomaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem portugêsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem inglêsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem hibernarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem fileMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboultMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem actionMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rebootMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem languageMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem portugueseMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem englishMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem hibernateMenuItem;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ToolStripMenuItem shutdownMenuItem;
         private System.Windows.Forms.CheckBox cBoxHibernar;
-        private System.Windows.Forms.ToolStripMenuItem desligarAgoraToolStripMenuItem;
+        private System.Windows.Forms.CheckBox cBoxSeconds;
+
+        public Button Button1 { get => button1; set => button1 = value; }
     }
 }
 
